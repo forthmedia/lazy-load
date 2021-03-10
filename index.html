@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+           img {
+                background-color: #F0F0F0;
+                width: 800px;
+                height: 450px;
+                margin: 10px auto;
+                border: 0px;
+                display: block;
+           }
+        </style>
+    </head>
+    <body>
+        <img src="./img/mpav-1.png" />
+        <img class="defer" data-src="./img/mpav-2.png" />
+        <img class="defer" data-src="./img/mpav-3.png" />
+        <img class="defer" data-src="./img/mpav-4.png" />
+        <img class="defer" data-src="./img/mpav-5.png" />
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+        
+                let deferred = document.querySelectorAll('[data-src]');
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.src = entry.target.dataset.src;
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+            
+                deferred.forEach(image => {
+                    observer.observe(image);
+                });
+            });
+        </script>
+    </body>
+</html>
