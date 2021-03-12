@@ -33,9 +33,7 @@
                     });
                 });
             
-                deferred.forEach(image => {
-                    observer.observe(image);
-                });
+                deferred.forEach(image => observer.observe(image));
             });
         </script>
     </body>
